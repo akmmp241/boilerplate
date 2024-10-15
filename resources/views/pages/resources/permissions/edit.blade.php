@@ -43,9 +43,12 @@
                     <!--begin::Input group-->
                     <div class="mb-7">
                         <label class="required fw-semibold fs-6 mb-2">Guard Name</label>
-                        <input type="text" name="guard_name" id="guard_name"
-                            class="form-control form-control-solid mb-3 mb-lg-0 {{ $errors->get("guard_name") ? "is-invalid border border-1 border-danger" : "" }}" placeholder="Permission Guard Name"
-                            value="{{ $permission->guard_name }}" />
+                        <select name="guard_name" id="guard_name"
+                                class="form-control form-control-solid mb-3 mb-lg-0 {{ $errors->get('guard_name') ? 'is-invalid border border-1 border-danger' : '' }}">
+                            <option value="">Select Guard Name</option>
+                            <option value="web" {{ $permission->guard_name == "web" ? "selected" : "" }} >Web</option>
+                            <option value="api" {{ $permission->guard_name == "api" ? "selected" : "" }}>API</option>
+                        </select>
                         <x-input-error class="mt-2" :messages="$errors->get('guard_name')" />
                     </div>
                   </div>
