@@ -113,6 +113,16 @@
                                             @endcan
                                             <!--end::Menu item-->
                                             <!--begin::Menu item-->
+                                            @can('permission-show')
+                                                <div class="menu-item px-3">
+                                                    <a href="{{ route('resources.permissions.show', ['permission' => $permission]) }}"
+                                                       type="button" class="menu-link px-3 edit-role-btn">
+                                                        Show
+                                                    </a>
+                                                </div>
+                                            @endcan
+                                            <!--end::Menu item-->
+                                            <!--begin::Menu item-->
                                             @can('permission-delete')
                                             <div class="menu-item px-3">
                                                 <form id="delete-form-{{ $permission->id }}"

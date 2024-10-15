@@ -35,14 +35,15 @@ class PermissionTableSeeder extends Seeder
             ['id' => 12, 'name' => 'permission-create'],
             ['id' => 13, 'name' => 'permission-edit'],
             ['id' => 14, 'name' => 'permission-delete'],
+            ['id' => 15, 'name' => 'permission-show'],
 
-            ['id' => 15, 'name' => 'setting-general'],
-            ['id' => 16, 'name' => 'setting-smtp',],
+            ['id' => 16, 'name' => 'setting-general'],
+            ['id' => 17, 'name' => 'setting-smtp',],
 
-            ['id' => 17, 'name' => 'config-view'],
-            ['id' => 18, 'name' => 'config-create'],
-            ['id' => 19, 'name' => 'config-edit'],
-            ['id' => 20, 'name' => 'config-delete'],
+            ['id' => 18, 'name' => 'config-view'],
+            ['id' => 19, 'name' => 'config-create'],
+            ['id' => 20, 'name' => 'config-edit'],
+            ['id' => 21, 'name' => 'config-delete'],
 
         ];
 

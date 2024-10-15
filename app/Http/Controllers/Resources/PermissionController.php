@@ -7,6 +7,7 @@ use App\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 
 class PermissionController extends Controller
 {
@@ -16,6 +17,7 @@ class PermissionController extends Controller
         $this->middleware('permission:permission-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:permission-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:permission-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:permission-show', ['only' => ['show']]);
     }
 
     /**
@@ -78,7 +80,13 @@ class PermissionController extends Controller
      */
     public function show(Permission $permission)
     {
-        //
+        $rolesAttached = Role::join('role_has_permissions', 'role_has_permissions.role_id', '=', 'roles.id')
+            ->where("role_has_permissions.permission_id", $permission->id)
+            ->with('users')
+            ->get();
+        $rolesCount = $rolesAttached->count();
+
+        return view('pages.resources.permissions.show', compact('permission', 'rolesAttached', 'rolesCount'));
     }
 
     /**
