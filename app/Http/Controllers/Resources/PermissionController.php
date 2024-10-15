@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 
 class PermissionController extends Controller
 {
@@ -16,25 +17,26 @@ class PermissionController extends Controller
         $this->middleware('permission:permission-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:permission-delete', ['only' => ['destroy']]);
     }
+
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $query = Permission::orderByDesc('created_at');
-        $perPage = 10; 
+        $perPage = 10;
         $search = $request->input('search');
 
         if (!empty($search)) {
             $query->where('name', 'like', '%' . $search . '%');
         }
-    
+
         // Menambahkan paginasi
         $permissions = $query->paginate($perPage);
 
         return view('pages.resources.permissions.index', compact('permissions'));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -104,7 +106,7 @@ class PermissionController extends Controller
         );
 
         $permission = $permission->update($credentials);
-        
+
         $message = [
             "status" => $permission ? "success" : "failed",
             "message" => $permission ? "Data updated successfully" : "Data failed to update!"

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Resources;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -17,28 +18,28 @@ class RoleController extends Controller
         $this->middleware('permission:roles-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:roles-delete', ['only' => ['destroy']]);
     }
-    
-    public function index(Request $request)
+
+    public function index(Request $request): View
     {
         $search = $request->input('search');
         $perPage = 10;
         $permissions = Permission::all();
         $query = Role::orderByDesc('created_at');
-    
+
         if ($search) {
             $query->where('name', 'LIKE', "%{$search}%");
         }
-    
+
         $roles = $query->paginate($perPage);
-    
+
         return view('pages.resources.roles.index', compact('roles', 'permissions'));
     }
 
 
-    public function create()
+    public function create(): View
     {
         $permissions = Permission::all();
-        
+
         return view('pages.resources.roles.create', compact('permissions'));
     }
 

@@ -47,7 +47,7 @@
                             @foreach($permissions as $key => $value)
                                 <div class="d-flex fv-row">
                                     <div class="form-check form-check-custom form-check-solid">
-                                        <input class="form-check-input me-3" name="permission[]" type="checkbox" value="{{ $value->id }}" id="kt_modal_update_role_option_{{ $value->id }}" {{ in_array($value->id, $role->permissions->pluck('id')->toArray()) ? 'checked' : '' }}>
+                                        <input class="form-check-input me-3" name="permission[]" type="checkbox" value="{{ $value->name }}" id="kt_modal_update_role_option_{{ $value->id }}" {{ in_array($value->id, $role->permissions->pluck('id')->toArray()) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="kt_modal_update_role_option_{{ $value->id }}">
                                             <div class="fw-bold text-gray-800">{{ $value->name }}</div>
                                         </label>
