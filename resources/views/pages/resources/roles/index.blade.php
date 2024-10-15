@@ -93,7 +93,7 @@
                                     <td>{{ $role->guard_name }}</td>
                                     <td>{{ $role->created_at }}</td>
                                     <td class="d-none">{{ $role->updated_at }}</td>
-                                    @canany(['roles-edit', 'roles-delete'])
+                                    @canany(['roles-edit', 'roles-delete', ['roles-show']])
                                     <td class="text-end">
                                         <a href="#"
                                             class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm"
@@ -110,6 +110,14 @@
                                             </div>
                                             @endcan
                                             <!--end::Menu item-->
+                                            <!--begin:Menu item-->
+                                            @can('roles-show')
+                                            <div class="menu-item px-3">
+                                                <a href="{{ route('resources.roles.show', ['role' => $role->id]) }}"
+                                                   class="menu-link px-3">Show</a>
+                                            </div>
+                                            @endcan
+                                            <!--end:Menu item-->
                                             <!--begin::Menu item-->
                                             @can('roles-delete')
                                             <div class="menu-item px-3">
